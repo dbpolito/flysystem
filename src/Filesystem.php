@@ -354,6 +354,17 @@ class Filesystem implements FilesystemInterface
 
         return $this->getAdapter()->getMetadata($path);
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getPath($path)
+    {
+        $path = Util::normalizePath($path);
+        $this->assertPresent($path);
+
+        return $this->getAdapter()->applyPathPrefix($path);
+    }
 
     /**
      * @inheritdoc
